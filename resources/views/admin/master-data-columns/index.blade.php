@@ -1,38 +1,37 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-xs uppercase tracking-[0.3em] text-rose-500">Administrator</p>
-                <h2 class="font-serif-display text-3xl text-rose-800 leading-tight">Master Data Columns</h2>
-            </div>
-            @if(Route::has('admin.master-data-columns.create'))
-                <a href="{{ route('admin.master-data-columns.create') }}"
-                   class="inline-flex items-center px-4 py-2 rounded-full bg-rose-500 text-white text-sm font-medium hover:bg-rose-600 transition">
-                    + New Column
-                </a>
-            @endif
+        <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Administrator</p>
+            <h2 class="font-serif-display text-3xl text-gray-900 leading-tight">Master Data Columns</h2>
         </div>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto">
-        <div class="bg-white rounded-2xl shadow-sm border border-rose-100 overflow-hidden">
-            <table class="min-w-full divide-y divide-rose-100">
-                <thead class="bg-rose-50/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-end mb-4">
+            <a href="{{ route('admin.master-data-columns.create') }}"
+               class="inline-flex items-center px-4 py-2 rounded-md bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition">
+                + New Column
+            </a>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-rose-700">Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-rose-700">Name to Show</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-rose-700">Data Type</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-rose-700">Required</th>
-                        <th class="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-rose-700">Actions</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Name</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Name to Show</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Data Type</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Required</th>
+                        <th class="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-rose-50">
+                <tbody class="divide-y divide-gray-100">
                     @forelse($columns as $column)
-                        <tr class="hover:bg-rose-50/30">
-                            <td class="px-6 py-4 text-sm text-gray-800 font-medium">{{ $column->name }}</td>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 text-sm text-gray-900 font-medium">{{ $column->name }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700 font-mono">{{ $column->name_to_show }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-xs font-medium">
+                            <td class="px-6 py-4 text-sm">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 text-xs font-medium">
                                     {{ $column->data_type }}
                                 </span>
                             </td>
@@ -40,19 +39,20 @@
                                 @if($column->required)
                                     <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-xs font-medium">Yes</span>
                                 @else
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 text-xs font-medium">No</span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 text-xs font-medium">No</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-right text-sm">
                                 @if($column->exists && Route::has('admin.master-data-columns.edit'))
-                                    <a href="{{ route('admin.master-data-columns.edit', $column) }}" class="text-rose-600 hover:underline me-3">Edit</a>
+                                    <a href="{{ route('admin.master-data-columns.edit', $column) }}"
+                                       class="text-gray-700 hover:text-gray-900 hover:underline me-3">Edit</a>
                                 @endif
                                 @if($column->exists && Route::has('admin.master-data-columns.destroy'))
                                     <form action="{{ route('admin.master-data-columns.destroy', $column) }}" method="POST" class="inline"
                                           onsubmit="return confirm('Delete this column?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:underline">Delete</button>
+                                        <button type="submit" class="text-red-600 hover:text-red-700 hover:underline">Delete</button>
                                     </form>
                                 @endif
                                 @unless($column->exists)

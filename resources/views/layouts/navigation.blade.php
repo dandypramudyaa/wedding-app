@@ -38,6 +38,15 @@
                 <span>{{ __('Dashboard') }}</span>
             </a>
 
+            {{-- Guest List --}}
+            <a href="{{ route('guest-list.index') }}"
+               class="{{ $linkBase }} {{ request()->routeIs('guest-list.*') ? $linkActive : $linkIdle }}">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>{{ __('Guest List') }}</span>
+            </a>
+
             <a href="{{ route('profile.edit') }}"
                class="{{ $linkBase }} {{ request()->routeIs('profile.*') ? $linkActive : $linkIdle }}">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
