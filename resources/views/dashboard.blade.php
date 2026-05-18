@@ -1,24 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <div>
-                <h2 class="font-serif-display text-3xl text-rose-800 leading-tight">
-                    Hello, {{ Auth::user()->name }}
-                </h2>
-                <p class="text-sm text-gray-500 mt-1">Welcome back to your wedding portal</p>
-            </div>
-            <div class="text-right">
-                <span class="text-[10px] uppercase tracking-widest text-rose-500">Your Role</span>
-                <div class="mt-1 flex flex-wrap gap-2 justify-end">
-                    @forelse(Auth::user()->roles as $role)
-                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-medium">
-                            {{ ucfirst($role->name) }}
-                        </span>
-                    @empty
-                        <span class="text-xs text-gray-400">No role assigned</span>
-                    @endforelse
-                </div>
-            </div>
+        <div>
+            <h1 class="text-lg font-semibold text-gray-900 leading-tight">
+                Dashboard
+            </h1>
+            <p class="text-sm text-gray-500">Welcome back, {{ Auth::user()->name }}.</p>
         </div>
     </x-slot>
 
